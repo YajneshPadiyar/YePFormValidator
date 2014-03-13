@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>YeP Form Validator Demo</title>
+<style>
+.Phone{
+float:Left;
+width:2%;
+}
+.Phone4{
+float:Left;
+width:3%;
+}
+.Length3{
+width:100%;
+}
+.Length4{
+width:100%;
+}
+.NewLine{
+height:20px;
+width:100%;
+}
+.Error-Input{
+-webkit-box-shadow: 0px 0px 1px #FF0000;
+  -moz-box-shadow: 0px 0px 1px #FF0000;
+  box-shadow: 0px 0px 1px #FF0000;
+  border-color: #FF0000;
+    border-style: solid;
+}
+</style>
+<link  rel="stylesheet" href="src\css\YePFormValidator.css" type="text/css"></link>
+<script src="src\js\jQuery\jquery-1.8.2.js" type="text/javascript" charset="utf-8"></script>
+<script src="src\js\YePFormValidator.js" type="text/javascript" charset="utf-8"></script>
+
+<script>
+$(function(){
+$("#Email").YePFormValidator({Type:"email",OnBlur:true,message:"Enter a valid email address"});
+});
+</script>
+</head>
+<body>
+<div>
+<div>Email Address</div>
+<div ><input id="Email"/></div>
+</div>
+<div class="NewLine"></div><br>	
+<div>
+<div>Credt Card #</div>
+<div class="Phone4"><input id = "Credit1" class="Length4"/></div><span style='float:left;'>-</span>
+<div class="Phone4"><input id = "Credit2"  class="Length4"/></div><span style='float:left;'>-</span>
+<div class="Phone4"><input id = "Credit3"  class="Length4"/></div><span style='float:left;'>-</span>
+<div class="Phone4"><input id = "Credit4"  class="Length4"/></div>
+</div>
+
+</body>
+</html>
