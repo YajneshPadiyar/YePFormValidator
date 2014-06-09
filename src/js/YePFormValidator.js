@@ -1,7 +1,7 @@
 (function ($) {
 
    $.fn.YePFormValidator = function (options) {
-
+		
       var FormValidSetup = $.extend({
             Type : "",
 			OnBlur : true,
@@ -9,21 +9,43 @@
          }, options);
       return this.each(function () {
 		var element = this;
+		console.log(FormValidSetup.Type);
          switch(FormValidSetup.Type.toUpperCase()){
-		 case("EMAIL"):
-			Validate(element);
+		 case("EMAIL"):{
+			Validate(element,'YepEmailValidate','YepEmailValidateOnBlur');
+			}
+		 break;
+		 case("NUMERIC"):{
+			Validate(element,'YepNumbericValidate','YepNumbericValidateOnBlur');
+		 }
 		 break;
 		 default:
 		 }
 		 $(".YepEmailValidateOnBlur").blur(EmailValidateOnBlur);
+		 $(".YepNumbericValidateOnBlur").blur(NumbericValidateOnBlur);
       });
-	  
-      function Validate(element)
+	  function NumbericValidateOnBlur(e){
+		var value = $(this).val();
+		var element = this;
+		var isValid = false;
+		for(var i = 0,len = value.length;i<len;i++){
+			if(isNaN(Number(value[i]))){
+				isValid = true;
+				break;
+			}
+		}
+		if(isValid){
+		HighLightError(element);
+		ShowErrorMessage(element);
+		}else{RemoveHighLight(element);}
+	  }
+	  //Validate(element,ValidateClass,ValidateOnBlur)
+      function Validate(element,vc,bc)
 	  {
-		$(element).addClass("YepEmailValidate");
+		$(element).addClass(vc);
 		if(FormValidSetup.OnBlur)
 		{
-			$(element).addClass("YepEmailValidateOnBlur");
+			$(element).addClass(bc);
 		}
 	  }
       function EmailValidateOnBlur(e){
@@ -43,7 +65,7 @@
 	  function ShowErrorMessage(element){
 	  $(element).after("<div>"+FormValidSetup.message+" </div>");
 	  }
-	  function RemoveHighLight(){
+	  function RemoveHighLight(element){
 		$(element).removeClass("Error-Input");
 	  }
 	  function HighLightError(element){
